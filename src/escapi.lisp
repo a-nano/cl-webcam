@@ -49,29 +49,29 @@
 
 ;; Retruns the ESCAPI version. 0x300 for 3.0.
 ;; When checking the version, accept higher versions too.
-(cffi:defcfun ("ESCAPIVersionProc" escapi-version-proc) :int)
+(cffi:defcfun ("ESCAPIVersion" escapi-version) :int)
 
 ;; Gets value (0..1) of a camera property (see CAPTURE_PROPERITES, above)
-(cffi:defcfun ("getCapturePropertyValueProc" get-capture-property-value-proc) :float
+(cffi:defcfun ("getCapturePropertyValue" get-capture-property-value) :float
               (device-no :uint)
               (prop :int))
 
 ;; Gets whther the property is set to automatic (see CAPTURE_PROPERITES, above)
-(cffi:defcfun ("getCapturePropertyAutoProc" get-capture-property-auto-proc) :int
+(cffi:defcfun ("getCapturePropertyAuto" get-capture-property-auto) :int
               (device-no :uint)
               (prop :int))
 
 ;; Set camera property to a value (0..1) and whether it should be set to auto.
-(cffi:defcfun ("setCapturePropertyProc" set-capture-property-proc) :int
+(cffi:defcfun ("setCaptureProperty" set-capture-property) :int
               (device-no :uint)
               (prop :int)
               (value :float)
               (autoval :int))
 
 ;; Retrun line number of error, or 0 if no catastrophic error has occured.
-(cffi:defcfun ("getCaptureERRORLineProc" get-capture-error-line-proc) :int
+(cffi:defcfun ("getCaptureERRORLine" get-capture-error-line) :int
               (device-no :uint))
 
 ;; Return HRESULT of the catastrophic error, or 0 if none.
-(cffi:defcfun ("getCaptureErrorCodeProc" get-capture-error-code-proc) :int
+(cffi:defcfun ("getCaptureErrorCode" get-capture-error-code) :int
               (device-no :uint))
