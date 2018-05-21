@@ -57,18 +57,15 @@
    When checking the version, accept higher versions too.
 ")
 
-
 (cffi:defcfun ("getCapturePropertyValue" get-capture-property-value) :float
   "Gets value (0..1) of a camera property (see CAPTURE_PROPERITES, above)"
   (device-no :uint)
   (prop :int))
 
-
 (cffi:defcfun ("getCapturePropertyAuto" get-capture-property-auto) :int
   "Gets whther the property is set to automatic (see CAPTURE_PROPERITES, above)"
   (device-no :uint)
   (prop :int))
-
 
 (cffi:defcfun ("setCaptureProperty" set-capture-property) :int
   "Set camera property to a value (0..1) and whether it should be set to auto."
@@ -77,11 +74,9 @@
   (value :float)
   (autoval :int))
 
-
 (cffi:defcfun ("getCaptureERRORLine" get-capture-error-line) :int
   "Retrun line number of error, or 0 if no catastrophic error has occured."
   (device-no :uint))
-
 
 (cffi:defcfun ("getCaptureErrorCode" get-capture-error-code) :int
   "Return HRESULT of the catastrophic error, or 0 if none."
