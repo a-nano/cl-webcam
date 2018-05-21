@@ -7,6 +7,10 @@
 		:with-foreign-objects
 		:mem-aref
 		:foreign-alloc
-		:foreign-slot-value)
+		:foreign-slot-value
+		:*foreign-library-directories*)
+  ;; cffi
+  (:export :*foreign-library-directories*)
+  ;; main.lisp
   (:export :get-capture))
 
