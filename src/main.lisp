@@ -13,7 +13,6 @@
 		(aref img-buf (+ (* i 3) 2)) (mem-aref buf :uchar (+ (* i 4) 2))))
     img-buf))
 
-
 (defun get-capture (device-no &key (height 480) (width 640) (fps 10.0))
   (with-foreign-objects ((c '(:struct simple-cap-params))
 			 (target-buf :int (1+ (* height width))))

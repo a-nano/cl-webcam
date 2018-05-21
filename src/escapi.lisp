@@ -13,16 +13,13 @@
   ;; Fps
   (m-fps :float))
 
-
 (cffi:defcfun ("setupESCAPI" setup-escapi) :int
   " Sets up the ESCAPI DLL and the function pointers below. Call this first!
  Returns number of capture devices found (same as countCaptureDevices, berlow
 ")
 
-
 (cffi:defcfun ("countCaptureDevices" count-capture-devices) :int
   "return the number of capture devices found")
-
 
 (cffi:defcfun ("initCapture" init-capture) :int
   "initCapture tries to open the video capture device.
@@ -34,29 +31,26 @@
   (device-no :uint)
   (a-params :pointer))
 
-
 (cffi:defcfun ("deinitCapture" deinit-capture) :void
   "deinitcapture closes the video capture device."
   (device-no :uint))
-
 
 (cffi:defcfun ("doCapture" do-capture) :void
   "doCapture requests video frame to be captured."  
 (device-no :uint))
 
-
 (cffi:defcfun ("isCaptureDone" is-capture-done) :int
   "isCaptureDone return 1 when the requested frame has been captured."
   (device-no :uint))
 
-;; Get the user-friendly name of capture device.
 (cffi:defcfun ("getCaptureDeviceName" get-capture-device-name) :void
+  "Get the user-friendly name of capture device."
   (device-no :uint)
   (name-buffer :pointer)
   (buffer-length :int))
 
-;; Retruns the ESCAPI DLL version. 0x200 for 2.0 and later (for legacy support)
-(cffi:defcfun ("ESCAPIDLLVersion" escapi-dll-version) :int)
+(cffi:defcfun ("ESCAPIDLLVersion" escapi-dll-version) :int
+ "Retruns the ESCAPI DLL version. 0x200 for 2.0 and later (for legacy support)")
 
 (cffi:defcfun ("ESCAPIVersion" escapi-version) :int
   "Retruns the ESCAPI version. 0x300 for 3.0.
