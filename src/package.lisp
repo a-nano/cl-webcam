@@ -12,5 +12,5 @@
   ;; cffi
   (:export :*foreign-library-directories*)
   ;; main.lisp
-  (:export :get-capture))
-
+  (:export :get-capture
+	   :load-escapi))
