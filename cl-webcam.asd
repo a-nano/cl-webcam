@@ -16,8 +16,10 @@
   :depends-on ("cffi")
   :components ((:module "src"
                 :components
-                ((:file "cl-webcam")
-                 (:file "escapi"))))
+                ((:file "package")
+		 (:file "escapi")
+		 (:file "main"))))
+  :serial t
   :description "web camera api"
   :long-description
   #.(read-file-string
