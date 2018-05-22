@@ -23,17 +23,6 @@
 " 
   (cffi:load-foreign-library "escapi")
 
-(cffi:defcstruct simple-cap-params
-  ;; target buffer.
-  ;; Must be at least m-width * m-height * sizeof(int) of size
-  (m-target-buf :pointer)
-  ;; Buffer width
-  (m-width :int)
-  ;; Buffer height
-  (m-height :int)
-  ;; Fps
-  (m-fps :float))
-
 #|
   (cffi:defcfun ("setupESCAPI" setup-escapi) :int
     "Sets up the ESCAPI DLL and the function pointers below. Call this first!
