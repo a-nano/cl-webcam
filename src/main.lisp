@@ -42,7 +42,7 @@
 		    (get-raw-data target-buf height width)))
       (escapi-deinit-capture device-no))))
 
-(defun make-capture-parameter (height width fps)
+(defun make-capture-parameter (height width &optional (fps 10.0))
   (let ((parameter (foreign-alloc '(:struct simple-cap-params)))
 	(target-buf (foreign-alloc :int :count (1+ (* height width)))))
     (setf (foreign-slot-value parameter '(:struct simple-cap-params) 'm-target-buf) target-buf)

@@ -35,7 +35,7 @@ Customized use (unsafety but fast).
 ;=> ((0 . "TOSHIBA Web Camera - HD") (1 . "Logicool Webcam C930e"))
 
 ;; Make instance of parameter's structure.
-(defvar *param* (make-capture-parameter 480 640 10.0))
+(defvar *param* (make-capture-parameter 480 640))
 
 ;; Init capture device.
 (init-capture 0 *param*)
