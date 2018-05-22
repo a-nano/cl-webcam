@@ -12,6 +12,7 @@
 		:foreign-type-size
 		:foreign-string-to-lisp
 		:foreign-free
+		:foreign-array-free
 		:pointerp
 		:*foreign-library-directories*)
   ;; cffi

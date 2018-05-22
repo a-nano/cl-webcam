@@ -54,7 +54,7 @@
 (defun clear-capture-parameters (&rest parameters)
   (let ((pointers (remove-if-not #'pointerp parameters)))
     (and pointers (mapc #'(lambda (pointer)
-			    (cffi:foreign-array-free (foreign-slot-value pointer '(:struct simple-cap-params) 'm-target-buf))
+			    (foreign-array-free (foreign-slot-value pointer '(:struct simple-cap-params) 'm-target-buf))
 			    (foreign-free pointer))
 			pointers)
 	 t)))
