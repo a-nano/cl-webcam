@@ -72,7 +72,7 @@ Customized use (unsafety but fast).
 1. Download `escapi.dll' and set Path your environment.
 (http://sol.gfxile.net/zip/escapi3.zip)
 
-2. Clone your local-projects.
+2. Clone to your local-projects.
 ```common-lisp
 cd $HOME/quicklisp/local-projects
 git clone https://github.com/a-nano/cl-webcam.git
