@@ -69,7 +69,7 @@ Customized use (unsafety but fast).
 ```
 
 ## Installation
-1. Download escapi.dll and set Path your environment.
+1. Download `escapi.dll' and set Path your environment.
 (http://sol.gfxile.net/zip/escapi3.zip)
 
 2. Clone your local-projects.
