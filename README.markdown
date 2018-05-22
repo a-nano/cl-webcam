@@ -2,23 +2,69 @@
 
 ## Usage
 
+For use single shot capture (slowly but safety).
 ```common-lisp
 
-;; to load escapi library
+;; To load escapi library.
 (load-library)
 ;=> t
 
-;; check web camera devices
+;; Check web camera devices.
 (get-capture-device-name-list)
 ;=> ((0 . "TOSHIBA Web Camera - HD") (1 . "Logicool Webcam C930e"))
 
-;; single shot capture on device 0
+;; Single shot capture on device 0.
 (single-capture 0)
 ;=> #(46 32 135 120 56 62 32 43 64 102 200 54 31 31 65 87 ...)
 
-;; to save jpeg file (use cl-jpeg)
+;; To save jpeg file (use cl-jpeg).
 (ql:quickload :cl-jpeg)
 (cl-jpeg:encode-image "foo.jpg" (single-capture 0) 3 480 640)
+
+```
+
+Customized Use (unsafety but fast).
+```common-lisp
+
+;; To load escapi library.
+(load-library)
+;=> t
+
+;; Check web camera devices.
+(get-capture-device-name-list)
+;=> ((0 . "TOSHIBA Web Camera - HD") (1 . "Logicool Webcam C930e"))
+
+;; Make instance of parameter's structure.
+(defvar *param* (make-capture-parameter 480 640 10.0))
+
+;; Init capture device.
+(init-capture 0 *param*)
+;=> t
+
+;; Do capture.
+(do-capture 0)
+;=> t
+
+;; Confirm whether capture is finish.
+(wait-capture-done 0)
+;=> DONE
+
+;; Get buffer (default is rgb array).
+(get-buffer *param*)
+;=> #(46 32 135 120 56 62 32 43 64 102 200 54 31 31 65 87 ...)
+
+
+;;               ;;
+;; Do something! ;;
+;;               ;;
+
+;; Close capture dvice.
+(deinit-capture 0)
+;=> t
+
+;; Do free instance of parameter's structure.
+(clear-capture-parameters *param*)
+;=> t
 
 ```
 
