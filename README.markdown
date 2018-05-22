@@ -20,6 +20,7 @@
 (ql:quickload :cl-jpeg)
 (cl-jpeg:encode-image "foo.jpg" (single-capture 0) 3 480 640)
 
+```
 
 ## Installation
 
