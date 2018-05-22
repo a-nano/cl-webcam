@@ -15,13 +15,14 @@
   :license "LLGPL"
   :depends-on ("cffi")
   :components ((:module "src"
+		:serial t
                 :components
                 ((:file "package")
 		 (:file "escapi")
 		 (:file "main"))))
-  :serial t
   :description "web camera api"
   :long-description
   #.(read-file-string
      (subpathname *load-pathname* "README.markdown"))
   :in-order-to ((test-op (test-op "cl-webcam-test"))))
+

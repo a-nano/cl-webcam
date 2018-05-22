@@ -10,8 +10,9 @@
   :depends-on ("cl-webcam"
                "prove")
   :components ((:module "tests"
-                :components
-                ((:test-file "cl-webcam"))))
+		:serial t
+		:components
+		((:test-file "escapi")
+		 (:test-file "main"))))
   :description "Test system for cl-webcam"
-
   :perform (test-op (op c) (symbol-call :prove-asdf :run-test-system c)))

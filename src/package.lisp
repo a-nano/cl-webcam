@@ -33,7 +33,9 @@
 	   :deinit-capture
 	   :do-capture
 	   :is-capture-done
+	   :wait-capture-done
 	   :get-capture-device-name
+	   :get-capture-device-name-list
 	   :get-capture-property-value
 	   :get-capture-property-auto
 	   :set-capture-property

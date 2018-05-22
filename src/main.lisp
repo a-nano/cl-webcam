@@ -96,15 +96,30 @@
   (let ((result (escapi-is-capture-done device-no)))
     (and (not (zerop result)) t)))
 
+(defun wait-capture-done (device-no &key (limit-time 3000))
+  (loop with i = 0
+     if (is-capture-done device-no)
+     return 'done
+     else
+     do (progn
+	  (sleep 0.001)
+	  (incf i))
+     if (>= i limit-time)
+     do (error "wait capture time is over."))) 
+
 (defun get-capture-device-name (device-no)
   (with-foreign-pointer-as-string (foreign-string +buffer-size+)
     (escapi-get-capture-device-name device-no foreign-string +buffer-size+)
     (foreign-string-to-lisp foreign-string)))
 
+(defun get-capture-device-name-list ()
+  (loop for i below (count-capture-devices)
+     collect (cons i (get-capture-device-name i))))
+
 (defun get-capture-property-value (device-no prop)
   (escapi-get-capture-property-value device-no prop))
 
-(defun get-capture-property-auto (devece-no prop)
+(defun get-capture-property-auto (device-no prop)
   (escapi-get-capture-property-auto device-no prop))
 
 (defun set-capture-property (device-no prop value autoval)
@@ -112,10 +127,10 @@
 
 (defun get-capture-error-line (device-no)
   (let ((result (escapi-get-capture-error-line device-no)))
-    (and (not (zerop result)) result)))
+    (or (zerop result) result)))
 
 (defun get-capture-error-code (device-no)
   (let ((result (escapi-get-capture-error-code device-no)))
-    (and (not (zerop result)) result)))
+    (or (zerop result) result)))
 
 ;; end of file
