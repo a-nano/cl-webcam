@@ -89,7 +89,7 @@
 
 (defun init-capture (device-no parameter)
   (let ((result (escapi-init-capture device-no parameter)))
-    (and (not (zerop result)) t)))
+    (not (zerop result))))
 
 (defun deinit-capture (device-no)
   (escapi-deinit-capture device-no)
@@ -101,7 +101,7 @@
 
 (defun is-capture-done (device-no)
   (let ((result (escapi-is-capture-done device-no)))
-    (and (not (zerop result)) t)))
+    (not (zerop result))))
 
 (defun wait-capture-done (device-no &key (limit-time 3000))
   (loop with i = 0
