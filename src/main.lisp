@@ -39,7 +39,7 @@
 		   return 'done)
 		(if rgb
 		    (convert-rgb target-buf height width)
-		    (get-raw-data target-buf height width))
+		    (get-raw-data target-buf height width)))
       (escapi-deinit-capture device-no))))
 
 (defun make-capture-parameter (height width fps)
