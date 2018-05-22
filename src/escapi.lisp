@@ -13,7 +13,7 @@
 
 #-win32
 (defun load-library ()
-  (warn "This library is use only Windows.")
+  (warn "This library is use Windows only.")
   (return-from load-library))
 
 #+win32
