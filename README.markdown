@@ -2,7 +2,7 @@
 
 ## Usage
 
-TO use single shot capture (slowly but safety).
+To use single shot capture (slowly but safety).
 ```common-lisp
 
 ;; To load escapi library.
