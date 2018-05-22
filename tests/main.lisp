@@ -8,6 +8,10 @@
 
 (setf *enable-colors* nil)
 
+(defparameter +height+ 480)
+(defparameter +width+ 640)
+(defparameter +fps+ 10.0)
+
 (load-library)
 
 (plan nil)
@@ -17,17 +21,17 @@
   (ok (single-capture 0 :rgb nil)))
 
 (subtest "make-capture-parameter test"
-  (let ((param (make-capture-parameter 480 640 10.0)))
+  (let ((param (make-capture-parameter +height+ +width+ +fps+)))
     (unwind-protect
 	 (ok param)
       (clear-capture-parameters param))))
 
 (subtest "clear-capture-parameters test"
-  (let ((param (make-capture-parameter 480 640 10.0)))
+  (let ((param (make-capture-parameter +height+ +width+ +fps+)))
     (ok (clear-capture-parameters param))))
 
 (subtest "get-buffer test"
-  (let ((param (make-capture-parameter 480 640 10.0)))
+  (let ((param (make-capture-parameter +height+ +width+ +fps+)))
     (unwind-protect
 	 (progn
 	   (ok (get-buffer param))
@@ -35,41 +39,41 @@
       (clear-capture-parameters param))))
 
 (subtest "get-height test"
-  (let ((param (make-capture-parameter 480 640 10.0)))
-    (is (get-height param) 480)
+  (let ((param (make-capture-parameter +height+ +width+ +fps+)))
+    (is (get-height param) +height+)
     (clear-capture-parameters param)))
 
 (subtest "get-width test"
-  (let ((param (make-capture-parameter 480 640 10.0)))
+  (let ((param (make-capture-parameter +height+ +width+ +fps+)))
     (unwind-protect
-	 (is (get-width param) 640)
+	 (is (get-width param) +width+)
       (clear-capture-parameters param))))
 
 (subtest "get-fps test"
-  (let ((param (make-capture-parameter 480 640 10.0)))
+  (let ((param (make-capture-parameter +height+ +width+ +fps+)))
     (unwind-protect 
-	 (is (get-fps param) 10.0)
+	 (is (get-fps param) +fps+)
       (clear-capture-parameters param))))
 
 (subtest "count-capture-devices test"
   (ok (count-capture-devices)))
 
 (subtest "init-capture test"
-  (let ((param (make-capture-parameter 480 640 10.0)))
+  (let ((param (make-capture-parameter +height+ +width+ +fps+)))
     (unwind-protect
 	 (ok (init-capture 0 param))
       (deinit-capture 0)
       (clear-capture-parameters param))))
 
 (subtest "deinit-capture test"
-  (let ((param (make-capture-parameter 480 640 10.0)))
+  (let ((param (make-capture-parameter +height+ +width+ +fps+)))
     (unwind-protect
 	 (init-capture 0 param)
       (ok (deinit-capture 0))
       (clear-capture-parameters param))))
 
 (subtest "do-capture test"
-  (let ((param (make-capture-parameter 480 640 10.0)))
+  (let ((param (make-capture-parameter +height+ +width+ +fps+)))
     (unwind-protect
 	 (progn
 	   (init-capture 0 param)
@@ -79,7 +83,7 @@
       (clear-capture-parameters param))))
 
 (subtest "is-capture-done test"
-  (let ((param (make-capture-parameter 480 640 10.0)))
+  (let ((param (make-capture-parameter +height+ +width+ +fps+)))
     (unwind-protect
 	 (progn
 	   (init-capture 0 param)
@@ -90,7 +94,7 @@
       (clear-capture-parameters param))))
 
 (subtest "wait-capture-done test"
-  (let ((param (make-capture-parameter 480 640 10.0)))
+  (let ((param (make-capture-parameter +height+ +width+ +fps+)))
     (unwind-protect
 	 (progn
 	   (init-capture 0 param)
@@ -100,7 +104,7 @@
       (clear-capture-parameters param))))
 
 (subtest "get-capture-device-name test"
-  (let ((param (make-capture-parameter 480 640 10.0)))
+  (let ((param (make-capture-parameter +height+ +width+ +fps+)))
     (unwind-protect
 	 (progn
 	   (init-capture 0 param)
@@ -109,7 +113,7 @@
       (clear-capture-parameters param))))
 
 (subtest "get-capture-device-name-list test"
-  (let ((param (make-capture-parameter 480 640 10.0)))
+  (let ((param (make-capture-parameter +height+ +width+ +fps+)))
     (unwind-protect
 	 (progn
 	   (init-capture 0 param)
@@ -118,7 +122,7 @@
       (clear-capture-parameters param))))
 
 (subtest "get-capture-property-value test"
-  (let ((param (make-capture-parameter 480 640 10.0)))
+  (let ((param (make-capture-parameter +height+ +width+ +fps+)))
     (unwind-protect
 	 (progn
 	   (init-capture 0 param)
@@ -127,7 +131,7 @@
       (clear-capture-parameters param))))
 
 (subtest "get-capture-property-auto test"
-  (let ((param (make-capture-parameter 480 640 10.0)))
+  (let ((param (make-capture-parameter +height+ +width+ +fps+)))
     (unwind-protect
 	 (progn
 	   (init-capture 0 param)
@@ -136,7 +140,7 @@
       (clear-capture-parameters param))))
 
 (subtest "set-capture-property test"
-  (let ((param (make-capture-parameter 480 640 10.0)))
+  (let ((param (make-capture-parameter +height+ +width+ +fps+)))
     (unwind-protect
 	 (progn
 	   (init-capture 0 param)
@@ -145,7 +149,7 @@
       (clear-capture-parameters param))))
 
 (subtest "get-capture-error-line test"
-  (let ((param (make-capture-parameter 480 640 10.0)))
+  (let ((param (make-capture-parameter +height+ +width+ +fps+)))
     (unwind-protect
 	 (progn
 	   (init-capture 0 param)
@@ -154,7 +158,7 @@
       (clear-capture-parameters param))))
 
 (subtest "get-capture-error-code test"
-  (let ((param (make-capture-parameter 480 640 10.0)))
+  (let ((param (make-capture-parameter +height+ +width+ +fps+)))
     (unwind-protect
 	 (progn
 	   (init-capture 0 param)
