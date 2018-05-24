@@ -120,8 +120,9 @@
     (foreign-string-to-lisp foreign-string)))
 
 (defun get-capture-device-name-list ()
-  (loop for i below (count-capture-devices)
-     collect (cons i (get-capture-device-name i))))
+  (when (count-capture-devices)
+    (loop for i below (count-capture-devices)
+       collect (cons i (get-capture-device-name i)))))
 
 (defun get-capture-property-value (device-no prop)
   (escapi-get-capture-property-value device-no prop))
