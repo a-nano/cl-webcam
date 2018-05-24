@@ -84,8 +84,7 @@
   (foreign-slot-value parameter '(:struct simple-cap-params) 'm-fps))
 
 (defun count-capture-devices ()
-  (let ((result (escapi-count-capture-devices)))
-    (and (not (zerop result)) result)))
+  (escapi-count-capture-devices))
 
 (defun init-capture (device-no parameter)
   (let ((result (escapi-init-capture device-no parameter)))
@@ -120,9 +119,8 @@
     (foreign-string-to-lisp foreign-string)))
 
 (defun get-capture-device-name-list ()
-  (when (count-capture-devices)
-    (loop for i below (count-capture-devices)
-       collect (cons i (get-capture-device-name i)))))
+  (loop for i below (count-capture-devices)
+     collect (cons i (get-capture-device-name i))))
 
 (defun get-capture-property-value (device-no prop)
   (escapi-get-capture-property-value device-no prop))
