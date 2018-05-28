@@ -18,14 +18,22 @@
 (defparameter +height+ 480)
 (defparameter +width+ 640)
 (defparameter +fps+ 10.0)
+(defvar *device-no*)
 
-(load-library)
+(setf *device-no*
+      (let ((no (count-capture-devices)))
+	(if (zerop no)
+	    (error "Camera device is not connected.")
+	    (1- no))))
 
 (plan nil)
 
+(subtest "load-library test"
+  (ok (load-library)))
+
 (subtest "single-capture test"
-  (ok (single-capture 0))
-  (ok (single-capture 0 :rgb nil)))
+  (ok (single-capture *device-no*))
+  (ok (single-capture *device-no* :rgb nil)))
 
 (subtest "make-capture-parameter test"
   (let ((param (make-capture-parameter +height+ +width+ +fps+)))
@@ -68,109 +76,109 @@
 (subtest "init-capture test"
   (let ((param (make-capture-parameter +height+ +width+ +fps+)))
     (unwind-protect
-	 (ok (init-capture 0 param))
-      (deinit-capture 0)
+	 (ok (init-capture *device-no* param))
+      (deinit-capture *device-no*)
       (clear-capture-parameters param))))
 
 (subtest "deinit-capture test"
   (let ((param (make-capture-parameter +height+ +width+ +fps+)))
     (unwind-protect
-	 (init-capture 0 param)
-      (ok (deinit-capture 0))
+	 (init-capture *device-no* param)
+      (ok (deinit-capture *device-no*))
       (clear-capture-parameters param))))
 
 (subtest "do-capture test"
   (let ((param (make-capture-parameter +height+ +width+ +fps+)))
     (unwind-protect
 	 (progn
-	   (init-capture 0 param)
-	   (ok (do-capture 0))
-	   (wait-capture-done 0))
-      (deinit-capture 0)
+	   (init-capture *device-no* param)
+	   (ok (do-capture *device-no*))
+	   (wait-capture-done *device-no*))
+      (deinit-capture *device-no*)
       (clear-capture-parameters param))))
 
 (subtest "is-capture-done test"
   (let ((param (make-capture-parameter +height+ +width+ +fps+)))
     (unwind-protect
 	 (progn
-	   (init-capture 0 param)
-	   (do-capture 0)
-	   (wait-capture-done 0)
-	   (ok (is-capture-done 0)))
-      (deinit-capture 0)
+	   (init-capture *device-no* param)
+	   (do-capture *device-no*)
+	   (wait-capture-done *device-no*)
+	   (ok (is-capture-done *device-no*)))
+      (deinit-capture *device-no*)
       (clear-capture-parameters param))))
 
 (subtest "wait-capture-done test"
   (let ((param (make-capture-parameter +height+ +width+ +fps+)))
     (unwind-protect
 	 (progn
-	   (init-capture 0 param)
-	   (do-capture 0)
-	   (ok (wait-capture-done 0)))
-      (deinit-capture 0)
+	   (init-capture *device-no* param)
+	   (do-capture *device-no*)
+	   (ok (wait-capture-done *device-no*)))
+      (deinit-capture *device-no*)
       (clear-capture-parameters param))))
 
 (subtest "get-capture-device-name test"
   (let ((param (make-capture-parameter +height+ +width+ +fps+)))
     (unwind-protect
 	 (progn
-	   (init-capture 0 param)
-	   (ok (get-capture-device-name 0)))
-      (deinit-capture 0)
+	   (init-capture *device-no* param)
+	   (ok (get-capture-device-name *device-no*)))
+      (deinit-capture *device-no*)
       (clear-capture-parameters param))))
 
 (subtest "get-capture-device-name-list test"
   (let ((param (make-capture-parameter +height+ +width+ +fps+)))
     (unwind-protect
 	 (progn
-	   (init-capture 0 param)
+	   (init-capture *device-no* param)
 	   (ok (get-capture-device-name-list)))
-      (deinit-capture 0)
+      (deinit-capture *device-no*)
       (clear-capture-parameters param))))
 
 (subtest "get-capture-property-value test"
   (let ((param (make-capture-parameter +height+ +width+ +fps+)))
     (unwind-protect
 	 (progn
-	   (init-capture 0 param)
-	   (ok (get-capture-property-value 0 0)))
-      (deinit-capture 0)
+	   (init-capture *device-no* param)
+	   (ok (get-capture-property-value *device-no* 0)))
+      (deinit-capture *device-no*)
       (clear-capture-parameters param))))
 
 (subtest "get-capture-property-auto test"
   (let ((param (make-capture-parameter +height+ +width+ +fps+)))
     (unwind-protect
 	 (progn
-	   (init-capture 0 param)
-	   (ok (get-capture-property-auto 0 0)))
-      (deinit-capture 0)
+	   (init-capture *device-no* param)
+	   (ok (get-capture-property-auto *device-no* 0)))
+      (deinit-capture *device-no*)
       (clear-capture-parameters param))))
 
 (subtest "set-capture-property test"
   (let ((param (make-capture-parameter +height+ +width+ +fps+)))
     (unwind-protect
 	 (progn
-	   (init-capture 0 param)
-	   (ok (set-capture-property 0 1 1.0 0)))
-      (deinit-capture 0)
+	   (init-capture *device-no* param)
+	   (ok (set-capture-property *device-no* 1 1.0 0)))
+      (deinit-capture *device-no*)
       (clear-capture-parameters param))))
 
 (subtest "get-capture-error-line test"
   (let ((param (make-capture-parameter +height+ +width+ +fps+)))
     (unwind-protect
 	 (progn
-	   (init-capture 0 param)
-	   (ok (get-capture-error-line 0)))
-      (deinit-capture 0)
+	   (init-capture *device-no* param)
+	   (ok (get-capture-error-line *device-no*)))
+      (deinit-capture *device-no*)
       (clear-capture-parameters param))))
 
 (subtest "get-capture-error-code test"
   (let ((param (make-capture-parameter +height+ +width+ +fps+)))
     (unwind-protect
 	 (progn
-	   (init-capture 0 param)
-	   (ok (get-capture-error-code 0)))
-      (deinit-capture 0)
+	   (init-capture *device-no* param)
+	   (ok (get-capture-error-code *device-no*)))
+      (deinit-capture *device-no*)
       (clear-capture-parameters param))))
 
 (finalize)
