@@ -27,7 +27,7 @@
   (loop for i fixnum below (* height width (foreign-type-size :int))
        collect (mem-aref buf :uchar i)))
 
-(defun single-capture (device-no &key (height 480) (width 640) (fps 10.0) (rgb t))
+(defun single-capture (device-no &key (height 480) (width 640) (fps 10.0) (rgb t) (wait 0.5))
   (with-foreign-objects ((parameter '(:struct simple-cap-params))
 			 (target-buf :int (1+ (* height width))))
     (setf (foreign-slot-value parameter '(:struct simple-cap-params) 'm-target-buf) target-buf)
@@ -36,6 +36,7 @@
     (setf (foreign-slot-value parameter '(:struct simple-cap-params) 'm-fps) fps)
     (unwind-protect 
 	 (progn (escapi-init-capture device-no parameter)
+		(sleep wait)
 		(escapi-do-capture device-no)
 		;; Wait until capture is finish.
 		;; todo more better code.. 
