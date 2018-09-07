@@ -18,12 +18,12 @@
   ;; Fps
   (m-fps :float))
 
-#-win32
+#-(or win32 windows)
 (defun load-library ()
   (warn "This library is use Windows only.")
   (return-from load-library))
 
-#+win32
+#+(or win32 windows)
 (defun load-library ()
   "Load escapi.dll library.
    For use Windows only.
