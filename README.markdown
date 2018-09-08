@@ -83,8 +83,14 @@ git clone https://github.com/a-nano/cl-webcam.git
 (ql:quickload :cl-webcam)
 ```
 
-4. To run test system.
+5. If you are running lisp on msys, set the path of escapi.dll in the following way.
 ```common-lisp
+(push #P"path/to/your/downloaded/escapi.dll" cl-webcam:*foreign-library-directories*)
+```
+
+6. To run test system.
+```common-lisp
+(ql:quickload :prove)
 (asdf:test-system :cl-webcam)
 ```
 
